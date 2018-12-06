@@ -1,7 +1,7 @@
 . "$PSScriptRoot/../Start-PipelineCreator.ps1"
-Get-ChildItem -Path "$PSScriptRoot/../Repository/$RepositoryProvider/**/*.ps1" -Recurse | ForEach-Object { . $_ }
-Get-ChildItem -Path "$PSScriptRoot/../CI/$RepositoryProvider/**/*.ps1" -Recurse | ForEach-Object { . $_ }
-Get-ChildItem -Path "$PSScriptRoot/../CD/$RepositoryProvider/**/*.ps1" -Recurse | ForEach-Object { . $_ }
+Get-ChildItem -Path "$PSScriptRoot/../Repository/**/*.ps1" -Recurse | ForEach-Object { . $_ }
+Get-ChildItem -Path "$PSScriptRoot/../CI//**/*.ps1" -Recurse | ForEach-Object { . $_ }
+Get-ChildItem -Path "$PSScriptRoot/../CD/**/*.ps1" -Recurse | ForEach-Object { . $_ }
 
 Describe "Start-PipelineCreator" -Tag "Unit" {
 

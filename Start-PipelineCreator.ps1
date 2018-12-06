@@ -1,7 +1,7 @@
 . "$PSScriptRoot/Helpers/Helpers.ps1"
-Get-ChildItem -Path "$PSScriptRoot/Repository/$RepositoryProvider/**/*.ps1" -Recurse | ForEach-Object { . $_ }
-Get-ChildItem -Path "$PSScriptRoot/CI/$CIProvider/**/*.ps1" -Recurse | ForEach-Object { . $_ }
-Get-ChildItem -Path "$PSScriptRoot/CD/$CDProvider/**/*.ps1" -Recurse | ForEach-Object { . $_ }
+Get-ChildItem -Path "$PSScriptRoot/Repository/**/*.ps1" -Recurse | ForEach-Object { . $_ }
+Get-ChildItem -Path "$PSScriptRoot/CI/**/*.ps1" -Recurse | ForEach-Object { . $_ }
+Get-ChildItem -Path "$PSScriptRoot/CD/**/*.ps1" -Recurse | ForEach-Object { . $_ }
 
 function Start-PipelineCreator {
     param(
@@ -10,18 +10,21 @@ function Start-PipelineCreator {
         [ValidateScript( {!($_.Contains(" "))})]
         [string]$ProjectName,
         [Parameter(Position = 1, Mandatory = $true)]
-        [ArgumentCompleter( { Get-PipelineProviders -ProviderType "Repository" })]
-        [ValidateScript( { $_ -in (Get-PipelineProviders -ProviderType "Repository") })]
+        [ArgumentCompleter( { Get-PipelineProvider -ProviderType "Repository" })]
+        [ValidateScript( { $_ -in (Get-PipelineProvider -ProviderType "Repository") })]
         [string]$RepositoryProvider,
         [Parameter(Position = 2, Mandatory = $true)]
-        [ArgumentCompleter( { Get-PipelineProviders -ProviderType "CI" })]
-        [ValidateScript( { $_ -in (Get-PipelineProviders -ProviderType "CI") })]
+        [ArgumentCompleter( { Get-PipelineProvider -ProviderType "CI" })]
+        [ValidateScript( { $_ -in (Get-PipelineProvider -ProviderType "CI") })]
         [string]$CIProvider,
         [Parameter(Position = 3, Mandatory = $true)]
-        [ArgumentCompleter( { Get-PipelineProviders -ProviderType "CD" })]
-        [ValidateScript( { $_ -in (Get-PipelineProviders -ProviderType "CD") })]
+        [ArgumentCompleter( { Get-PipelineProvider -ProviderType "CD" })]
+        [ValidateScript( { $_ -in (Get-PipelineProvider -ProviderType "CD") })]
         [string]$CDProvider
     )
+
+    ### Initialise Providers
+
 
     ### Repo Creation
 
